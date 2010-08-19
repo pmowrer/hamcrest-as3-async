@@ -6,21 +6,21 @@ package org.hamcrest
 	import org.hamcrest.async.AsyncDescription;
 	import org.hamcrest.async.AsyncMatcher;
 	import org.hamcrest.async.AsyncStringDescription;
-
-    /**
-     * Used internally by <code>assertAsynchronouslyThat</code>.
-     *
-     * @param reason 		Description of failure should <code>actual</code> not match <code>matcher</code>
-     * @param actual 		Object to match
-     * @param asyncMatcher 	Matcher to match <code>actual</code> with.
+	
+	/**
+	 * Used internally by <code>assertAsynchronouslyThat</code>.
+	 *
+	 * @param reason 		Description of failure should <code>actual</code> not match <code>matcher</code>
+	 * @param actual 		Object to match
+	 * @param asyncMatcher 	Matcher to match <code>actual</code> with.
 	 * @param testCase 		The assoicated test case.
 	 * 
 	 * @author Patrick Mowrer
 	 * 
 	 */	
-    internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
+	internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
 													  asyncMatcher:AsyncMatcher, testCase:Object):void
-    {		
+	{		
 		var matcher:Matcher = asyncMatcher.callAsync(testCase, target, resultHandler, timeoutHandler);
 		
 		var errorDescription:AsyncDescription = new AsyncStringDescription();
@@ -65,7 +65,7 @@ package org.hamcrest
 				.appendText(reason)
 					.appendText("\n");
 			}
-						
+			
 			errorDescription
 			.appendText("Expected: ")
 				.appendDescriptionOf(asyncMatcher)
@@ -76,5 +76,5 @@ package org.hamcrest
 			throw new AssertionError(
 				errorDescription.toString());			
 		}
-    }
+	}
 }
