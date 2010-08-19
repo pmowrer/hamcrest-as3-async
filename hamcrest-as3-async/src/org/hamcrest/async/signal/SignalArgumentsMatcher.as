@@ -5,6 +5,11 @@ package org.hamcrest.async.signal
 	import org.hamcrest.TypeSafeDiagnosingMatcher;
 	import org.osflash.signals.utils.SignalAsyncEvent;
 
+	/**
+	 * 
+	 * @author Patrick Mowrer
+	 * 
+	 */	
 	public class SignalArgumentsMatcher extends TypeSafeDiagnosingMatcher
 	{
 		private var argumentMatchers:Array;

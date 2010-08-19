@@ -2,6 +2,11 @@ package org.hamcrest.async
 {
 	import org.hamcrest.StringDescription;
 
+	/**
+	 * 
+	 * @author Patrick Mowrer
+	 * 
+	 */	
 	public class AsyncStringDescription extends StringDescription implements AsyncDescription
 	{
 		public function AsyncStringDescription()

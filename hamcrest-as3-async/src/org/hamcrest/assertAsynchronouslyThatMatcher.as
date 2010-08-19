@@ -10,12 +10,14 @@ package org.hamcrest
     /**
      * Used internally by <code>assertAsynchronouslyThat</code>.
      *
-     * @param reason Description of failure should <code>actual</code> not match <code>matcher</code>
-     * @param actual Object to match
-     * @param matcher Matcher to match <code>actual</code> with.
-     *
-     * @author Patrick Mowrer
-     */
+     * @param reason 		Description of failure should <code>actual</code> not match <code>matcher</code>
+     * @param actual 		Object to match
+     * @param asyncMatcher 	Matcher to match <code>actual</code> with.
+	 * @param testCase 		The assoicated test case.
+	 * 
+	 * @author Patrick Mowrer
+	 * 
+	 */	
     internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
 													  asyncMatcher:AsyncMatcher, testCase:Object):void
     {		
@@ -74,36 +76,5 @@ package org.hamcrest
 			throw new AssertionError(
 				errorDescription.toString());			
 		}
-		
-        /*if (!matcher.matches(actual))
-        {
-			var errorDescription:Description = new BetterStringDescription();
-            var matcherDescription:Description = new BetterStringDescription();
-			var mismatchDescription:Description = new BetterStringDescription();
-
-            if (reason && reason.length > 0)
-            {
-				errorDescription
-                    .appendText(reason)
-                    .appendText("\n");
-            }
-
-			errorDescription
-                .appendText("Expected: ")
-                .appendDescriptionOf(matcher)
-                .appendText("\n     but: ")
-                .appendMismatchOf(matcher, actual);
-
-			matcherDescription.appendDescriptionOf(matcher);
-			
-			mismatchDescription.appendMismatchOf(matcher, actual);
-				
-            throw new AssertionError(
-				errorDescription.toString(), 
-				null, 
-				matcherDescription.toString(), 
-				mismatchDescription.toString(), 
-				actual);
-        }*/
     }
 }
