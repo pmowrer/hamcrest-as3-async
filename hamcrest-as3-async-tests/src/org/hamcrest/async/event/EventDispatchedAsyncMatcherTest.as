@@ -43,8 +43,8 @@ package org.hamcrest.async.event
 		[Test]
 		public function hasAReadableTimeoutDescription():void
 		{
-			assertAsyncTimeoutDescription("Event of type '" + FakeEventDispatcher.EXPECTED + 
-				"' wasn't dispatched before timeout at " + BaseAsyncMatcher.DEFAULT_TIMEOUT + " milliseconds", 
+			assertAsyncTimeoutDescription("Event of type \"" + FakeEventDispatcher.EXPECTED + 
+				"\" wasn't dispatched (timed out after <" + BaseAsyncMatcher.DEFAULT_TIMEOUT + "> ms)", 
 				dispatchesEventOfType(FakeEventDispatcher.EXPECTED));
 		}
 		
@@ -59,7 +59,6 @@ package org.hamcrest.async.event
 	}
 }
 
-import flash.events.DataEvent;
 import flash.events.Event;
 import flash.events.EventDispatcher;
 

@@ -32,13 +32,17 @@ package org.hamcrest.async.event
 		
 		override public function describeTimeoutTo(timeoutDescription:AsyncDescription):void
 		{
-			timeoutDescription.appendText(
-				"Event of type '" + eventType + "' wasn't dispatched before timeout at 500 milliseconds");
+			timeoutDescription
+				.appendText("Event of type ")
+				.appendValue(eventType)
+				.appendText(" wasn't dispatched (timed out after ")
+				.appendValue(timeout)
+				.appendText(" ms)");
 		}
 		
-		override public function callAsync(testCase:Object, target:IEventDispatcher, resultHandler:Function, timeoutHandler:Function):Matcher
+		override public function callAsync(testCase:Object, target:Object, resultHandler:Function, timeoutHandler:Function):Matcher
 		{
-			Async.handleEvent(testCase, target, eventType, resultHandler, timeout, null, timeoutHandler);
+			handleEvent(testCase, IEventDispatcher(target), eventType, resultHandler, timeoutHandler);
 			
 			return eventMatcher;
 		}

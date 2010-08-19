@@ -10,6 +10,7 @@
 # FlexUnit-generated files
 *.FlexUnitSettings/
 FlexUnitApplication.as
+FlexUnitApplication.mxml
 FlexUnitCompilerApplication.as
 
 # Mac-generated

@@ -16,7 +16,7 @@ package org.hamcrest
      *
      * @author Patrick Mowrer
      */
-    internal function assertAsynchronouslyThatMatcher(reason:String, target:IEventDispatcher, 
+    internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
 													  asyncMatcher:AsyncMatcher, testCase:Object):void
     {		
 		var matcher:Matcher = asyncMatcher.callAsync(testCase, target, resultHandler, timeoutHandler);
