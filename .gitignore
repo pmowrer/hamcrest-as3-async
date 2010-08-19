@@ -9,9 +9,8 @@
 
 # FlexUnit-generated files
 *.FlexUnitSettings/
-FlexUnitApplication.as
-FlexUnitApplication.mxml
-FlexUnitCompilerApplication.as
+FlexUnitApplication.*
+FlexUnitCompilerApplication.*
 
 # Mac-generated
 .DS_Store

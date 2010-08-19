@@ -2,6 +2,11 @@ package org.hamcrest.async.signal
 {
 	import org.hamcrest.Matcher;
 
+	/**
+	 * 
+	 * @author Patrick Mowrer
+	 * 
+	 */	
 	public function hasArguments(... rest):Matcher
 	{			
 		var argumentMatchers:Array = rest.map(wrapInEqualToIfNotMatcher);
