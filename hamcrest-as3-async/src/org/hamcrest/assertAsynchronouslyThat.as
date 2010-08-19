@@ -1,12 +1,12 @@
 package org.hamcrest
 {
-	import org.hamcrest.async.AsyncMatcher;
-	
-	/**
-	 * 
-	 * @author Patrick Mowrer
-	 * 
-	 */	
+    import org.hamcrest.async.AsyncMatcher;
+    
+    /**
+     * 
+     * @author Patrick Mowrer
+     * 
+     */	
     public function assertAsynchronouslyThat(... rest):void
     {
         if (rest.length == 4 && rest[2] is AsyncMatcher)
@@ -15,7 +15,7 @@ package org.hamcrest
         }
         else if (rest.length == 3 && rest[1] is AsyncMatcher)
         {
-			assertAsynchronouslyThatMatcher("", rest[0], rest[1], rest[2])
+            assertAsynchronouslyThatMatcher("", rest[0], rest[1], rest[2])
         }
         else
         {
