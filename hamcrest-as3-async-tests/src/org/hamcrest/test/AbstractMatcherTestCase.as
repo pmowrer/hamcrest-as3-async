@@ -1,6 +1,9 @@
-package org.hamcrest
+package org.hamcrest.test
 {
     import org.flexunit.Assert;
+    import org.hamcrest.Description;
+    import org.hamcrest.Matcher;
+    import org.hamcrest.StringDescription;
 
     public class AbstractMatcherTestCase extends Assert
     {

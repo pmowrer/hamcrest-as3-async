@@ -1,8 +1,9 @@
-package org.hamcrest.async.signal
+package org.hamcrest.test.async.signal
 {
-	import org.hamcrest.AbstractMatcherTestCase;
+	import org.hamcrest.test.AbstractMatcherTestCase;
 	import org.osflash.signals.Signal;
 	import org.osflash.signals.utils.SignalAsyncEvent;
+	import org.hamcrest.async.signal.hasArguments;
 
 	public class HasArgumentsMatcherTest extends AbstractMatcherTestCase
 	{

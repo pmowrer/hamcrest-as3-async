@@ -1,9 +1,10 @@
-package org.hamcrest
+package org.hamcrest.test
 {
     import org.hamcrest.async.AsyncDescribing;
     import org.hamcrest.async.AsyncDescription;
     import org.hamcrest.async.AsyncMatcher;
     import org.hamcrest.async.AsyncStringDescription;
+    import org.hamcrest.SelfDescribing;
 
     public class AbstractAsyncMatcherTestCase extends AbstractMatcherTestCase
     {

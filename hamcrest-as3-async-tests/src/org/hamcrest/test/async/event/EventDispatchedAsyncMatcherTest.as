@@ -1,11 +1,12 @@
-package org.hamcrest.async.event
+package org.hamcrest.test.async.event
 {
 	import flash.events.Event;
 	
-	import org.hamcrest.AbstractAsyncMatcherTestCase;
+	import org.hamcrest.test.AbstractAsyncMatcherTestCase;
 	import org.hamcrest.assertAsynchronouslyThat;
 	import org.hamcrest.async.BaseAsyncMatcher;
 	import org.hamcrest.object.hasProperty;
+	import org.hamcrest.async.event.dispatchesEventOfType;
 	
 	public class EventDispatchedAsyncMatcherTest extends AbstractAsyncMatcherTestCase
 	{		

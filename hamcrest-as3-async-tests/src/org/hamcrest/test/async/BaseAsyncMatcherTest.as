@@ -1,4 +1,4 @@
-package org.hamcrest.async
+package org.hamcrest.test.async
 {
 	import org.hamcrest.assertAsynchronouslyThat;
 	import org.hamcrest.object.hasProperty;

@@ -1,12 +1,13 @@
-package org.hamcrest.async.signal
+package org.hamcrest.test.async.signal
 {
 	import flash.events.Event;
 	
-	import org.hamcrest.AbstractAsyncMatcherTestCase;
+	import org.hamcrest.test.AbstractAsyncMatcherTestCase;
 	import org.hamcrest.assertAsynchronouslyThat;
 	import org.hamcrest.async.BaseAsyncMatcher;
 	import org.osflash.signals.ISignal;
 	import org.osflash.signals.Signal;
+	import org.hamcrest.async.signal.dispatchesSignal;
 	
 	public class SignalDispatchedAsyncMatcherTest extends AbstractAsyncMatcherTestCase
 	{		
