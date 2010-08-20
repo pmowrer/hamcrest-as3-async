@@ -37,7 +37,7 @@ package org.hamcrest.test.async.event
 		[Test]
 		public function hasAReadableDescription():void
 		{
-			assertAsyncDescription("Event of type '" + FakeEventDispatcher.EXPECTED + "' was dispatched", 
+			assertAsyncDescription("Event of type \"" + FakeEventDispatcher.EXPECTED + "\" was dispatched", 
 				dispatchesEventOfType(FakeEventDispatcher.EXPECTED));
 		}
 		

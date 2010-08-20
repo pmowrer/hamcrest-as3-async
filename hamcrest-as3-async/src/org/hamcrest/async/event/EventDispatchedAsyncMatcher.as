@@ -20,13 +20,16 @@ package org.hamcrest.async.event
         
         override public function describeTo(description:Description):void
         {
-            description.appendText("Event of type '" + eventType + "' was dispatched");
+            description
+                .appendText("Event of type ")
+                .appendValue(eventType)
+                .appendText(" was dispatched");
         }
         
         override public function describeTimeoutTo(timeoutDescription:AsyncDescription):void
         {
             timeoutDescription
-            .appendText("Event of type ")
+                .appendText("Event of type ")
                 .appendValue(eventType)
                 .appendText(" wasn't dispatched (timed out after ")
                 .appendValue(timeout)
