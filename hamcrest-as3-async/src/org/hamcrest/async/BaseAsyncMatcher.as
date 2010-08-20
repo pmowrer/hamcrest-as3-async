@@ -46,7 +46,7 @@ package org.hamcrest.async
             return actualMatcher;
         }		
         
-        public function beforeTimeoutOf(value:int):AsyncMatcher
+        public function beforeTimeoutAt(value:int):AsyncMatcher
         {
             timeout = value;
             
