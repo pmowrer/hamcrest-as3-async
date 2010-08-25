@@ -3,10 +3,8 @@ package org.hamcrest.async.signal
     import flash.events.IEventDispatcher;
     
     import org.hamcrest.Description;
-    import org.hamcrest.Matcher;
     import org.hamcrest.async.AsyncDescription;
-    import org.hamcrest.async.BaseAsyncMatcher;
-    
+    import org.hamcrest.async.BaseDispatchedEventMatcher;
     import org.osflash.signals.Signal;
     import org.osflash.signals.utils.SignalAsync;
     import org.osflash.signals.utils.SignalAsyncEvent;
@@ -16,7 +14,7 @@ package org.hamcrest.async.signal
      * @author Patrick Mowrer
      * 
      */	
-    public class SignalDispatchedAsyncMatcher extends BaseAsyncMatcher
+    public class SignalDispatchedAsyncMatcher extends BaseDispatchedEventMatcher
     {	
         public function SignalDispatchedAsyncMatcher()
         {

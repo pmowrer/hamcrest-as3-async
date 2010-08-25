@@ -10,9 +10,9 @@ package org.hamcrest
     /**
      * Used internally by <code>assertAsynchronouslyThat</code>.
      *
-     * @param reason 		Description of failure should <code>actual</code> not match <code>matcher</code>
-     * @param actual 		Object to match
-     * @param asyncMatcher 	Matcher to match <code>actual</code> with.
+     * @param reason 		Custom description of failure traced if the assertion fails.
+     * @param target 		Object which will exhibit asynchronous behavior.
+     * @param asyncMatcher 	Matcher to match <code>target</code> with.
      * @param testCase 		The assoicated test case.
      * 
      * @author Patrick Mowrer
@@ -27,7 +27,7 @@ package org.hamcrest
         var matcherDescription:AsyncDescription = new AsyncStringDescription();
         var mismatchDescription:AsyncDescription = new AsyncStringDescription();
         
-        function resultHandler(event:Event, data:Object):void 
+        function resultHandler(event:Event, data:Object = null):void 
         {			
             if(!matcher.matches(event))
             {	
@@ -57,7 +57,7 @@ package org.hamcrest
             }
         }
         
-        function timeoutHandler():void 
+        function timeoutHandler(data:Object = null):void 
         {	
             if (reason && reason.length > 0)
             {

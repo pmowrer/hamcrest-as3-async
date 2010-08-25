@@ -14,6 +14,7 @@
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LIB_LOCATION}/version4libs/FlexProject/"/>
       <libraryPathEntry kind="1" linkType="1" path="${FLEXUNIT_LOCALE_LOCATION}/version4locale/"/>
       <libraryPathEntry kind="3" linkType="1" path="/hamcrest/bin/hamcrest.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/mockolate/bin/mockolate.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

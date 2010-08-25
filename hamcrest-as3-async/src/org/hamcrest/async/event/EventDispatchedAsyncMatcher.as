@@ -4,14 +4,14 @@ package org.hamcrest.async.event
     
     import org.hamcrest.Description;
     import org.hamcrest.async.AsyncDescription;
-    import org.hamcrest.async.BaseAsyncMatcher;
+    import org.hamcrest.async.BaseDispatchedEventMatcher;
     
     /**
      * 
      * @author Patrick Mowrer
      * 
      */	
-    public class EventDispatchedAsyncMatcher extends BaseAsyncMatcher
+    public class EventDispatchedAsyncMatcher extends BaseDispatchedEventMatcher
     {
         public function EventDispatchedAsyncMatcher(type:String)
         {	

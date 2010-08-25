@@ -53,20 +53,6 @@ package org.hamcrest.async
             return this;
         }
         
-        public function which(... rest):AsyncMatcher
-        {
-            var matchers:Array = rest;
-            
-            if (rest.length == 1 && rest[0] is Array)
-            {
-                matchers = rest[0];
-            }
-            
-            actualMatcher = new AllOfMatcher(matchers);
-            
-            return this;
-        }
-        
         protected function prepareTarget(value:Object):IEventDispatcher
         {
             throw new IllegalOperationError("BaseAsyncMatcher#prepareTarget must be overriden by sub-class.");			
