@@ -3,6 +3,7 @@ package org.hamcrest
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     
+    import org.hamcrest.async.AssertionTimeoutError;
     import org.hamcrest.async.AsyncDescription;
     import org.hamcrest.async.AsyncMatcher;
     import org.hamcrest.async.AsyncStringDescription;
@@ -73,7 +74,7 @@ package org.hamcrest
             
             (errorDescription as AsyncDescription).appendTimeoutDescriptionOf(asyncMatcher);
             
-            throw new AssertionError(
+            throw new AssertionTimeoutError(
                 errorDescription.toString());			
         }
     }
