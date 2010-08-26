@@ -11,7 +11,7 @@
     <classEntry path="org.hamcrest.async.BaseAsyncMatcher"/>
     <classEntry path="org.hamcrest.async.BaseDispatchedEventMatcher"/>
     <classEntry path="org.hamcrest.async.EventObjectMatcher"/>
-    <classEntry path="org.hamcrest.async.InvertedAsyncMatcher"/>
+    <classEntry path="org.hamcrest.async.NegatedAsyncMatcher"/>
     <classEntry path="org.hamcrest.async.event.DispatchedEventMatcher"/>
     <classEntry path="org.hamcrest.async.event.dispatchesEventOfType"/>
     <classEntry path="org.hamcrest.async.never"/>

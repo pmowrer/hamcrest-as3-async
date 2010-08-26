@@ -2,24 +2,30 @@ package org.hamcrest.async
 {
     import org.hamcrest.Description;
     import org.hamcrest.Matcher;
+    import org.hamcrest.object.isFalsey;
     
-    public class InvertedAsyncMatcher implements AsyncMatcher
+    /**
+     * 
+     * @author Patrick Mowrer
+     * 
+     */	
+    public class NegatedAsyncMatcher implements AsyncMatcher
     {
         private var decorated:AsyncMatcher;
         
-        public function InvertedAsyncMatcher(decorated:AsyncMatcher)
+        public function NegatedAsyncMatcher(decorated:AsyncMatcher)
         {
             this.decorated = decorated;
         }
         
-        public function callAsync(testCase:Object, target:Object, resultHandler:Function, timeoutHandler:Function):Matcher
+        public function callAsync(testCase:Object, target:Object, successHandler:Function, failureHandler:Function):Matcher
         {
-            return decorated.callAsync(testCase, target, timeoutHandler, resultHandler);
+            return decorated.callAsync(testCase, target, failureHandler, successHandler);
         }
         
         public function describeTimeoutTo(description:AsyncDescription):void
         {
-            return decorated.describeTo(description);
+            return decorated.describeTimeoutTo(description);
         }
         
         public function describeTo(description:Description):void

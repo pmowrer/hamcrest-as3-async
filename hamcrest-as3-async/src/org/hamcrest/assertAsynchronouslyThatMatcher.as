@@ -22,44 +22,71 @@ package org.hamcrest
     internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
                                                       asyncMatcher:AsyncMatcher, testCase:Object):void
     {		
-        var matcher:Matcher = asyncMatcher.callAsync(testCase, target, resultHandler, timeoutHandler);
+        var matcher:Matcher = asyncMatcher.callAsync(testCase, target, successHandler, failureHandler);
         
         var errorDescription:AsyncDescription = new AsyncStringDescription();
         var matcherDescription:AsyncDescription = new AsyncStringDescription();
         var mismatchDescription:AsyncDescription = new AsyncStringDescription();
         
-        function resultHandler(event:Event, data:Object = null):void 
-        {			
-            if(!matcher.matches(event))
-            {	
-                if (reason && reason.length > 0)
-                {
-                    errorDescription
-                    .appendText(reason)
-                        .appendText("\n");
-                }
+        function successHandler():void
+        {
+            if(arguments.length == 2)
+            {
+                var event:Event = arguments[0];
                 
-                errorDescription
-                .appendText("Expected: ")
-                    .appendDescriptionOf(matcher)
-                    .appendText("\n     but: ")
-                    .appendMismatchOf(matcher, event);
-                
-                matcherDescription.appendDescriptionOf(matcher);
-                
-                mismatchDescription.appendMismatchOf(matcher, event);
-                
-                throw new AssertionError(
-                    errorDescription.toString(), 
-                    null, 
-                    matcherDescription.toString(), 
-                    mismatchDescription.toString(), 
-                    event);
+                if(!matcher.matches(event))
+                {	
+                    throwAssertionError(event);
+                } 
             }
         }
         
-        function timeoutHandler(data:Object = null):void 
-        {	
+        function failureHandler():void
+        {
+            if(arguments.length == 2)
+            {
+                var event:Event = arguments[0];
+                
+                if(matcher.matches(event))
+                {	
+                    throwAssertionError(event);
+                }                
+            }
+            else if(arguments.length == 1)
+            {
+ 		        throwAssertionTimeoutError();
+            }
+        }
+        
+        function throwAssertionError(event:Event):void
+        {
+            if (reason && reason.length > 0)
+            {
+                errorDescription
+                .appendText(reason)
+                    .appendText("\n");
+            }
+            
+            errorDescription
+            .appendText("Expected: ")
+                .appendDescriptionOf(matcher)
+                .appendText("\n     but: ")
+                .appendMismatchOf(matcher, event);
+            
+            matcherDescription.appendDescriptionOf(matcher);
+            
+            mismatchDescription.appendMismatchOf(matcher, event);
+            
+            throw new AssertionError(
+                errorDescription.toString(), 
+                null, 
+                matcherDescription.toString(), 
+                mismatchDescription.toString(), 
+                event);   
+        }
+        
+        function throwAssertionTimeoutError():void
+        {
             if (reason && reason.length > 0)
             {
                 errorDescription
@@ -75,7 +102,7 @@ package org.hamcrest
             (errorDescription as AsyncDescription).appendTimeoutDescriptionOf(asyncMatcher);
             
             throw new AssertionTimeoutError(
-                errorDescription.toString());			
+                errorDescription.toString());
         }
     }
 }

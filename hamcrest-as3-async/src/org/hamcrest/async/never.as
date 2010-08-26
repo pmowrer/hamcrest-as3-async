@@ -1,7 +1,12 @@
 package org.hamcrest.async
 {
+    /**
+     * 
+     * @author Patrick Mowrer
+     * 
+     */	
     public function never(matcher:AsyncMatcher):AsyncMatcher
     {
-        return new InvertedAsyncMatcher(matcher);
+        return new NegatedAsyncMatcher(matcher);
     }
 }

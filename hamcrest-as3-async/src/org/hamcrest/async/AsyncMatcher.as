@@ -9,6 +9,6 @@ package org.hamcrest.async
      */	
     public interface AsyncMatcher extends AsyncDescribing
     {
-        function callAsync(testCase:Object, target:Object, resultHandler:Function, timeoutHandler:Function):Matcher;
+        function callAsync(testCase:Object, target:Object, successHandler:Function, failureHandler:Function):Matcher;
     }
 }

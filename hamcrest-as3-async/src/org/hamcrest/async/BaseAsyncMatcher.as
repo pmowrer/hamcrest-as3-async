@@ -18,15 +18,16 @@ package org.hamcrest.async
     {	
         public static const DEFAULT_TIMEOUT:int = 500;
         
-        protected var actualMatcher:Matcher;
+        protected var eventObjectMatcher:Matcher;
         protected var timeout:int;
         protected var eventType:String;
         
-        public function BaseAsyncMatcher(eventType:String)
+        public function BaseAsyncMatcher(eventType:String, eventObjectMatcher:Matcher)
         {
             this.eventType = eventType;
+            this.eventObjectMatcher = eventObjectMatcher;
+
             timeout = DEFAULT_TIMEOUT;
-            actualMatcher = isTruthy();
         }
         
         public function describeTo(description:Description):void
@@ -39,11 +40,11 @@ package org.hamcrest.async
             throw new IllegalOperationError("BaseAsyncMatcher#timeoutDescription must be overriden by sub-class.");
         }
         
-        public final function callAsync(testCase:Object, untypedTarget:Object, resultHandler:Function, timeoutHandler:Function):Matcher
+        public final function callAsync(testCase:Object, untypedTarget:Object, successHandler:Function, failureHandler:Function):Matcher
         {
-            handleEvent(testCase, prepareTarget(untypedTarget), eventType, resultHandler, timeoutHandler);
+            handleEvent(testCase, prepareTarget(untypedTarget), eventType, successHandler, failureHandler);
             
-            return actualMatcher;
+            return eventObjectMatcher;
         }		
         
         public function beforeTimeoutAt(value:int):AsyncMatcher
@@ -59,9 +60,9 @@ package org.hamcrest.async
         }
         
         protected final function handleEvent(testCase:Object, target:IEventDispatcher, eventType:String, 
-                                             resultHandler:Function, timeoutHandler:Function):void
+                                             eventHandler:Function, timeoutHandler:Function):void
         {
-            Async.handleEvent(testCase, target, eventType, resultHandler, timeout, null, timeoutHandler);
+            Async.handleEvent(testCase, target, eventType, eventHandler, timeout, null, timeoutHandler);
         }
     }
 }

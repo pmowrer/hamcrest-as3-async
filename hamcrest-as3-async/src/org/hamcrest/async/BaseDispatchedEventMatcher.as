@@ -3,6 +3,7 @@ package org.hamcrest.async
     import org.hamcrest.Description;
     import org.hamcrest.Matcher;
     import org.hamcrest.core.AllOfMatcher;
+    import org.hamcrest.object.isTruthy;
     
     public class BaseDispatchedEventMatcher extends BaseAsyncMatcher implements EventObjectMatcher
     {
@@ -10,7 +11,7 @@ package org.hamcrest.async
         
         public function BaseDispatchedEventMatcher(eventType:String)
         {
-            super(eventType);
+            super(eventType, isTruthy());
             
             whichIsSet = false;
         }
@@ -24,7 +25,7 @@ package org.hamcrest.async
                 matchers = rest[0];
             }
             
-            actualMatcher = new AllOfMatcher(matchers);
+            eventObjectMatcher = new AllOfMatcher(matchers);
             
             whichIsSet = true;
             
