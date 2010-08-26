@@ -27,31 +27,27 @@ package org.hamcrest.async.signal
             var eventArguments:Array = (event as SignalAsyncEvent).args;
             
             if (eventArguments.length != argumentMatchers.length)
-            {
-                mismatchDescription.appendText(" was ")
-                    .appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), eventArguments);
-                
-                return false;
+            {   
+                matches = false;
             }
-            
-            function matchesArgument(matcher:Matcher, i:int, a:Array):void
+            else
             {
-                if(!matcher.matches(eventArguments[i]))
+                argumentMatchers.forEach(matchesArgument);
+                
+                function matchesArgument(matcher:Matcher, i:int, a:Array):void
                 {
-                    mismatchDescription
-                    .appendDescriptionOf(matcher)
-                        .appendMismatchOf(matcher, eventArguments[i]);
-                    
-                    if(i < a.length - 1)
+                    if(!matcher.matches(eventArguments[i]))
                     {
-                        mismatchDescription.appendText(', ');
+                        matches = false;
                     }
-                    
-                    matches = false;
                 }
             }
             
-            argumentMatchers.forEach(matchesArgument);
+            if(!matches)
+            {
+                mismatchDescription.appendText(" was ")
+                    .appendList(descriptionStart(), descriptionSeparator(), descriptionEnd(), eventArguments);
+            }
             
             return matches;
         }

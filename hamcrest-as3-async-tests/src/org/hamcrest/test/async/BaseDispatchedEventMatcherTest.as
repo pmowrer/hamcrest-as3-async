@@ -2,8 +2,9 @@ package org.hamcrest.test.async
 {
 	import org.hamcrest.assertAsynchronouslyThat;
 	import org.hamcrest.object.hasProperty;
+	import org.hamcrest.test.AbstractAsyncMatcherTestCase;
 
-	public class BaseDispatchedEventMatcherTest
+	public class BaseDispatchedEventMatcherTest extends AbstractAsyncMatcherTestCase
 	{		
 		[Test(async)]
 		public function canSupplyAdditionalRegularMatchersToMatchDispatchedEvent():void
@@ -19,9 +20,8 @@ package org.hamcrest.test.async
 }
 
 import org.hamcrest.async.AsyncMatcher;
-import org.hamcrest.async.DispatchedEventMatcher;
 
-internal function dispatchesExpectedEvent():DispatchedEventMatcher
+internal function dispatchesExpectedEvent():BaseDispatchedEventMatcher
 {
 	return new FakeAsyncMatcher();
 }
@@ -30,6 +30,7 @@ import flash.events.IEventDispatcher;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.async.BaseDispatchedEventMatcher;
+import org.hamcrest.Description;
 
 internal class FakeAsyncMatcher extends BaseDispatchedEventMatcher
 {	

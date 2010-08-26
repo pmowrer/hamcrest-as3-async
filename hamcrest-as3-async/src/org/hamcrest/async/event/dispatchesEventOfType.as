@@ -5,8 +5,8 @@ package org.hamcrest.async.event
      * @author Patrick Mowrer
      * 
      */	
-    public function dispatchesEventOfType(value:String):EventDispatchedAsyncMatcher
+    public function dispatchesEventOfType(value:String):DispatchedEventMatcher
     {
-        return new EventDispatchedAsyncMatcher(value);
+        return new DispatchedEventMatcher(value);
     }
 }

@@ -14,9 +14,9 @@ package org.hamcrest.async.signal
      * @author Patrick Mowrer
      * 
      */	
-    public class SignalDispatchedAsyncMatcher extends BaseDispatchedEventMatcher
+    public class DispatchedSignalMatcher extends BaseDispatchedEventMatcher
     {	
-        public function SignalDispatchedAsyncMatcher()
+        public function DispatchedSignalMatcher()
         {
             super(SignalAsyncEvent.CALLED);
         }

@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" version="3">
   <includeClasses>
-    <classEntry path="org.hamcrest.async.event.EventDispatchedAsyncMatcher"/>
-    <classEntry path="org.hamcrest.async.InvertedAsyncMatcher"/>
-    <classEntry path="org.hamcrest.async.DispatchedEventMatcher"/>
+    <classEntry path="org.hamcrest.assertAsynchronouslyThat"/>
+    <classEntry path="org.hamcrest.assertAsynchronouslyThatMatcher"/>
+    <classEntry path="org.hamcrest.async.AssertionTimeoutError"/>
+    <classEntry path="org.hamcrest.async.AsyncDescribing"/>
+    <classEntry path="org.hamcrest.async.AsyncDescription"/>
+    <classEntry path="org.hamcrest.async.AsyncMatcher"/>
+    <classEntry path="org.hamcrest.async.AsyncStringDescription"/>
+    <classEntry path="org.hamcrest.async.BaseAsyncMatcher"/>
     <classEntry path="org.hamcrest.async.BaseDispatchedEventMatcher"/>
+    <classEntry path="org.hamcrest.async.EventObjectMatcher"/>
+    <classEntry path="org.hamcrest.async.InvertedAsyncMatcher"/>
+    <classEntry path="org.hamcrest.async.event.DispatchedEventMatcher"/>
+    <classEntry path="org.hamcrest.async.event.dispatchesEventOfType"/>
+    <classEntry path="org.hamcrest.async.never"/>
+    <classEntry path="org.hamcrest.async.signal.SignalArgumentsMatcher"/>
+    <classEntry path="org.hamcrest.async.signal.DispatchedSignalMatcher"/>
+    <classEntry path="org.hamcrest.async.signal.dispatchesSignal"/>
+    <classEntry path="org.hamcrest.async.signal.hasArguments"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

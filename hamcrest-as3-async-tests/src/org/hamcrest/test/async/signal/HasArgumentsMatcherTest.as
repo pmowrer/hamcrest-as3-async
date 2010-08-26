@@ -31,12 +31,11 @@ package org.hamcrest.test.async.signal
 		}
 		
 		[Test]
-		// hamcrest-as3 doesnt really lend itself to this sort of detailed mismatching, yet
 		public function hasAReadableMismatchDescriptionForExpectedNumberOfArguments():void
 		{
 			var event:SignalAsyncEvent = new SignalAsyncEvent("anything", [123, "string"]);
 			
-			assertMismatch("\"string\"was <123>, <123>was \"string\"", hasArguments("string", 123), event);
+			assertMismatch(" was [<123>, \"string\"]", hasArguments("string", 123), event);
 		}
 	}
 }

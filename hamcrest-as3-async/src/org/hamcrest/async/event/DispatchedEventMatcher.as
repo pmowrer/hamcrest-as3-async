@@ -11,9 +11,9 @@ package org.hamcrest.async.event
      * @author Patrick Mowrer
      * 
      */	
-    public class EventDispatchedAsyncMatcher extends BaseDispatchedEventMatcher
+    public class DispatchedEventMatcher extends BaseDispatchedEventMatcher
     {
-        public function EventDispatchedAsyncMatcher(type:String)
+        public function DispatchedEventMatcher(type:String)
         {	
             super(type);
         }
