@@ -1,6 +1,7 @@
 package org.hamcrest.async
 {
     import flash.errors.IllegalOperationError;
+    import flash.events.Event;
     import flash.events.IEventDispatcher;
     
     import org.flexunit.async.Async;
@@ -18,14 +19,13 @@ package org.hamcrest.async
     {	
         public static const DEFAULT_TIMEOUT:int = 500;
         
-        protected var eventObjectMatcher:Matcher;
+        protected var asyncHandler:Function;
+        protected var eventType:String;      
         protected var timeout:int;
-        protected var eventType:String;
         
-        public function BaseAsyncMatcher(eventType:String, eventObjectMatcher:Matcher)
+        public function BaseAsyncMatcher(eventType:String)
         {
             this.eventType = eventType;
-            this.eventObjectMatcher = eventObjectMatcher;
 
             timeout = DEFAULT_TIMEOUT;
         }
@@ -40,11 +40,11 @@ package org.hamcrest.async
             throw new IllegalOperationError("BaseAsyncMatcher#timeoutDescription must be overriden by sub-class.");
         }
         
-        public final function callAsync(testCase:Object, untypedTarget:Object, successHandler:Function, failureHandler:Function):Matcher
+        public final function callAsync(testCase:Object, untypedTarget:Object, successHandler:Function, failureHandler:Function):void
         {
-            handleEvent(testCase, prepareTarget(untypedTarget), eventType, successHandler, failureHandler);
+            asyncHandler = Async.asyncHandler(testCase, successHandler, timeout, null, failureHandler);
             
-            return eventObjectMatcher;
+            prepareTarget(untypedTarget).addEventListener(eventType, this.eventHandler, false, 0, true );  
         }		
         
         public function beforeTimeoutAt(value:int):AsyncMatcher
@@ -58,11 +58,10 @@ package org.hamcrest.async
         {
             throw new IllegalOperationError("BaseAsyncMatcher#prepareTarget must be overriden by sub-class.");			
         }
-        
-        protected final function handleEvent(testCase:Object, target:IEventDispatcher, eventType:String, 
-                                             eventHandler:Function, timeoutHandler:Function):void
+
+        protected function eventHandler(event:Event):void
         {
-            Async.handleEvent(testCase, target, eventType, eventHandler, timeout, null, timeoutHandler);
+            asyncHandler(event);
         }
     }
 }

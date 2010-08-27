@@ -1,21 +1,38 @@
 package org.hamcrest.test.async
 {
 	import org.hamcrest.assertAsynchronouslyThat;
+	import org.hamcrest.object.equalTo;
 	import org.hamcrest.object.hasProperty;
 	import org.hamcrest.test.AbstractAsyncMatcherTestCase;
 
 	public class BaseDispatchedEventMatcherTest extends AbstractAsyncMatcherTestCase
 	{		
+        private var eventDispatcher:FakeEventDispatcher;
+        
+        [Before]
+        public function setUp():void
+        {
+            eventDispatcher = new FakeEventDispatcher();        
+        }
+        
 		[Test(async)]
 		public function canSupplyAdditionalRegularMatchersToMatchDispatchedEvent():void
-		{
-			var eventDispatcher:FakeEventDispatcher = new FakeEventDispatcher();
-			
+		{		
 			assertAsynchronouslyThat(eventDispatcher, 
 				dispatchesExpectedEvent().which(hasProperty("data")), this);
 			
-			eventDispatcher.dispatchExpectedWithData();
+			eventDispatcher.dispatchExpectedWithExpectedData();
 		}
+        
+        [Test(async)]
+        public function continuesToListenForEventIfDispatchedEventMatchesTypeButNotData():void
+        {
+            assertAsynchronouslyThat(eventDispatcher, 
+                dispatchesExpectedEvent().which(hasProperty("data", equalTo(FakeEventDispatcher.EXPECTED))), this);
+
+            eventDispatcher.dispatchExpectedWithUnexpectedData();
+            eventDispatcher.dispatchExpectedWithExpectedData();
+        }
 	}
 }
 
@@ -23,7 +40,7 @@ import org.hamcrest.async.AsyncMatcher;
 
 internal function dispatchesExpectedEvent():BaseDispatchedEventMatcher
 {
-	return new FakeAsyncMatcher();
+	return new ExpectedEventMatcher();
 }
 
 import flash.events.IEventDispatcher;
@@ -31,10 +48,11 @@ import flash.events.IEventDispatcher;
 import org.hamcrest.Matcher;
 import org.hamcrest.async.BaseDispatchedEventMatcher;
 import org.hamcrest.Description;
+import org.hamcrest.async.AsyncDescription;
 
-internal class FakeAsyncMatcher extends BaseDispatchedEventMatcher
+internal class ExpectedEventMatcher extends BaseDispatchedEventMatcher
 {	
-	public function FakeAsyncMatcher()
+	public function ExpectedEventMatcher()
 	{
 		super(FakeEventDispatcher.EXPECTED);
 	}
@@ -43,21 +61,50 @@ internal class FakeAsyncMatcher extends BaseDispatchedEventMatcher
 	{
 		return IEventDispatcher(target);
 	}		
+    
+    override public function describeTo(description:Description):void
+    {
+        description
+            .appendText("Event of type ")
+            .appendValue(eventType)
+            .appendText(" was dispatched");
+    }
+    
+    override public function describeTimeoutTo(timeoutDescription:AsyncDescription):void
+    {
+        timeoutDescription
+        .appendText("Event of type ")
+            .appendValue(eventType)
+            .appendText(" wasn't dispatched (timed out at ")
+            .appendValue(timeout)
+            .appendText(" ms)");         
+    }
 }
 
 import flash.events.Event;
 import flash.events.EventDispatcher;
+import flash.events.DataEvent;
 
 internal class FakeEventDispatcher extends EventDispatcher
 {
 	public static const EXPECTED:String = "expected";
+    public static const UNEXPECTED:String = "unexpected";
 
-	public function dispatchExpectedWithData():void
+    private var dataEvent:DataEvent;
+    
+	public function dispatchExpectedWithExpectedData():void
 	{
-		var dataEvent:DataEvent = new DataEvent(EXPECTED, "data");
+		dataEvent = new DataEvent(EXPECTED, EXPECTED);
 		
 		dispatchEvent(dataEvent);
 	}
+    
+    public function dispatchExpectedWithUnexpectedData():void
+    {
+        dataEvent = new DataEvent(EXPECTED, UNEXPECTED); 
+    
+        dispatchEvent(dataEvent);
+    }
 }
 
 internal class DataEvent extends Event

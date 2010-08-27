@@ -42,13 +42,21 @@ package org.hamcrest.test.async.signal
             signalDispatcher.dispatch("Expected", 123);
         }
         
-        [Test(async, expects="org.hamcrest.AssertionError")]
-        public function failsIfExpectedSignalWasDispatchedWithUnexpectedData():void
+        [Test(async, expects="org.hamcrest.async.AssertionTimeoutError")]
+        public function timesOutIfExpectedSignalWasDispatchedWithUnexpectedData():void
         {
             assertAsynchronouslyThat(signalDispatcher, dispatchesSignal().which(hasArguments("Expected", 123)), this);
             
             signalDispatcher.dispatch("Unexpected", 123);            
         }
+        
+        [Test(async, expects="org.hamcrest.async.AssertionTimeoutError")]
+        public function failsIfExpectedSignalOnceAndWasDispatchedWithUnexpectedData():void
+        {
+            assertAsynchronouslyThat(signalDispatcher, dispatchesSignal().which(hasArguments("Expected", 123)), this);
+            
+            signalDispatcher.dispatch("Unexpected", 123);            
+        }        
 		
 		[Test]
 		public function hasAReadableDescription():void

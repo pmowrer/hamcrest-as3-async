@@ -1,5 +1,7 @@
 package org.hamcrest.async
 {
+    import flash.events.Event;
+    
     import org.hamcrest.Description;
     import org.hamcrest.Matcher;
     import org.hamcrest.core.AllOfMatcher;
@@ -7,13 +9,13 @@ package org.hamcrest.async
     
     public class BaseDispatchedEventMatcher extends BaseAsyncMatcher implements EventObjectMatcher
     {
-        private var whichIsSet:Boolean;
+        protected var matcher:Matcher;
         
         public function BaseDispatchedEventMatcher(eventType:String)
         {
-            super(eventType, isTruthy());
+            super(eventType);
             
-            whichIsSet = false;
+            matcher = isTruthy();
         }
         
         public function which(... rest):AsyncMatcher
@@ -25,21 +27,22 @@ package org.hamcrest.async
                 matchers = rest[0];
             }
             
-            eventObjectMatcher = new AllOfMatcher(matchers);
-            
-            whichIsSet = true;
+            matcher = new AllOfMatcher(matchers);
             
             return this;
         }
         
-        override public function describeTo(description:Description):void
+        override protected final function eventHandler(event:Event):void
         {
-            super.describeTo(description);
-            
-            if(whichIsSet)
+            if(matches(event))   
             {
-                description.appendText(" which ");
+                asyncHandler(event);
             }
+        }
+        
+        protected function matches(event:Event):Boolean
+        {
+            return matcher.matches(event);
         }
     }
 }

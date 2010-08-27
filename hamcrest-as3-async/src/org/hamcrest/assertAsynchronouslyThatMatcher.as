@@ -22,7 +22,7 @@ package org.hamcrest
     internal function assertAsynchronouslyThatMatcher(reason:String, target:Object, 
                                                       asyncMatcher:AsyncMatcher, testCase:Object):void
     {		
-        var matcher:Matcher = asyncMatcher.callAsync(testCase, target, successHandler, failureHandler);
+        asyncMatcher.callAsync(testCase, target, successHandler, failureHandler);
         
         var errorDescription:AsyncDescription = new AsyncStringDescription();
         var matcherDescription:AsyncDescription = new AsyncStringDescription();
@@ -30,35 +30,22 @@ package org.hamcrest
         
         function successHandler():void
         {
-            if(arguments.length == 2)
-            {
-                var event:Event = arguments[0];
-                
-                if(!matcher.matches(event))
-                {	
-                    throwAssertionError(event);
-                } 
-            }
+
         }
         
         function failureHandler():void
         {
-            if(arguments.length == 2)
-            {
-                var event:Event = arguments[0];
-                
-                if(matcher.matches(event))
-                {	
-                    throwAssertionError(event);
-                }                
-            }
-            else if(arguments.length == 1)
+            if(arguments.length == 1)
             {
  		        throwAssertionTimeoutError();
             }
+            else
+            {
+                throwAssertionError();    
+            }
         }
         
-        function throwAssertionError(event:Event):void
+        function throwAssertionError():void
         {
             if (reason && reason.length > 0)
             {
@@ -69,20 +56,21 @@ package org.hamcrest
             
             errorDescription
             .appendText("Expected: ")
-                .appendDescriptionOf(matcher)
-                .appendText("\n     but: ")
-                .appendMismatchOf(matcher, event);
+                //.appendDescriptionOf(matcher)
+                .appendDescriptionOf(asyncMatcher)
+                .appendText("\n     but: ");
+                //.appendMismatchOf(matcher, event);
             
-            matcherDescription.appendDescriptionOf(matcher);
+            //matcherDescription.appendDescriptionOf(matcher);
             
-            mismatchDescription.appendMismatchOf(matcher, event);
+            //mismatchDescription.appendMismatchOf(matcher, event);
             
             throw new AssertionError(
                 errorDescription.toString(), 
                 null, 
                 matcherDescription.toString(), 
-                mismatchDescription.toString(), 
-                event);   
+                mismatchDescription.toString());
+                //event);   
         }
         
         function throwAssertionTimeoutError():void

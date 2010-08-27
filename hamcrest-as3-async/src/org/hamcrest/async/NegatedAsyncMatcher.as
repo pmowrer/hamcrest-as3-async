@@ -18,9 +18,9 @@ package org.hamcrest.async
             this.decorated = decorated;
         }
         
-        public function callAsync(testCase:Object, target:Object, successHandler:Function, failureHandler:Function):Matcher
+        public function callAsync(testCase:Object, target:Object, successHandler:Function, failureHandler:Function):void
         {
-            return decorated.callAsync(testCase, target, failureHandler, successHandler);
+            decorated.callAsync(testCase, target, failureHandler, successHandler);
         }
         
         public function describeTimeoutTo(description:AsyncDescription):void
